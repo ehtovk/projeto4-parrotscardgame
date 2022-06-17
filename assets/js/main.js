@@ -1,8 +1,11 @@
-let arr;
+let arr = [];
 let quantidade;
 let papagaios;
+let papagaio;
 let content;
 let verifier;
+let chosen1;
+let content_Parrots;
 
 startGame();
 
@@ -39,13 +42,13 @@ function showCards() {
    
    for(let i = 0; i < quantidade; i++) {
 
-      let papagaio = content_Parrots[i];
+      papagaio = content_Parrots[i];
       elemento.innerHTML += 
-      `        <div id="card${i}" onclick="turnAroundOnClick(this)"  class="card" data-identifier="card">
-                  <div class="face parrot" data-identifier="back-face" >
+      `        <div id="card${i}" onclick="verifyCards(this)"  class="card">
+                  <div class="view parrot">
                      <img src="assets/img/front 1.png" alt="">
                   </div>
-                  <div class="face parrot-gif turned-off" data-identifier="front-face">
+                  <div class="view parrot-gif">
                      <img src="assets/img/papagaio${papagaio}.gif" alt="">
                   </div>
                </div>
@@ -53,14 +56,15 @@ function showCards() {
    }
 }
 
-function turnAroundOnClick(place) {
+function verifyCards(place) {
    turnCards(place);
+   
 }
 
 function turnCards(place) {
-   place.querySelector(".parrot").classList.toggle("turned-off");
-   place.querySelector(".parrot-gif").classList.toggle("turned-off");
+   place.classList.add("flip");
 }
+
 
 
 
