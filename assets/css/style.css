@@ -24,6 +24,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 25px;
 }
 
 .card {
@@ -33,7 +34,7 @@ h1 {
     width: 146px;
     height: 182px;
     border-radius: 5px;
-    margin: 17px;
+    
     position: relative;
     transform-style: preserve-3d;
 }
