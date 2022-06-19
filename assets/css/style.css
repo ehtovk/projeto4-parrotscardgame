@@ -71,3 +71,22 @@ h1 {
 .card.flip .parrot-gif {
     transform: rotateY(0);
 }
+
+.moves {
+    background-color: #75B79E;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moves p {
+    text-align: center;
+    color: #EEF9BF;
+    font-size: 38px;
+}
