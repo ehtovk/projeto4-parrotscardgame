@@ -1,13 +1,15 @@
-let arr = [];
 let quantidade;
 let papagaios;
 let papagaio;
 let content_Parrots;
+let par = 0;
+let moves = 0;
 
 let first_Card;
 let first_Img;
 let second_Card;
 let second_Img;
+let deckOff = false;
 
 startGame();
 
@@ -60,13 +62,19 @@ function showCards() {
 
 function turnCards(place) {
    let click = place;
-   flipCards(click);
    if(!first_Card) {
+      flipCards(click);
+      moves++;
+      document.querySelector(".moves>p").innerHTML = moves;
       return first_Card = click;
       
-   } else if (place.id !== first_Card.id) {
+   } else if (place.id !== first_Card.id && !deckOff) {
+      flipCards(click);
+      moves++
+      document.querySelector(".moves>p").innerHTML = moves;
       second_Card = click;
-      
+      deckOff = true;
+  
    }
    first_Img = first_Card.querySelector(".parrot-gif>img").src;
    second_Img = second_Card.querySelector(".parrot-gif>img").src;
@@ -76,15 +84,30 @@ function turnCards(place) {
 
 function verifyCards(imgOne, imgTwo) {
    if (imgOne === imgTwo) {
+      par++;
+      if (par == quantidade/2) {
+         setTimeout(() => {
+            alert(`Você ganhou o jogo em ${moves} jogadas!`)
+            let question = prompt("Quer jogar de novo? (sim ou não)");
+            if (question === "sim") {
+               console.log("foi");
+               location.reload(true);
+            } else if (question === "não") {
+               alert("Você ganhou o jogo!");
+            }
+         }, 1000);
+      }
       first_Card.removeAttribute("onclick");
       second_Card.removeAttribute("onclick");
       first_Card = second_Card = "";
+      return deckOff = false;
    }
 
    setTimeout(()=> {
       first_Card.classList.remove("flip");
       second_Card.classList.remove("flip");
       first_Card = second_Card = "";
+      deckOff = false;
    }, 1000);
 }
 
