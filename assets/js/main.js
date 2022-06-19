@@ -2,10 +2,12 @@ let arr = [];
 let quantidade;
 let papagaios;
 let papagaio;
-let content;
-let verifier;
-let chosen1;
 let content_Parrots;
+
+let first_Card;
+let first_Img;
+let second_Card;
+let second_Img;
 
 startGame();
 
@@ -44,7 +46,7 @@ function showCards() {
 
       papagaio = content_Parrots[i];
       elemento.innerHTML += 
-      `        <div id="card${i}" onclick="verifyCards(this)"  class="card">
+      `        <div id="card${i}" onclick="turnCards(this)"  class="card">
                   <div class="view parrot">
                      <img src="assets/img/front 1.png" alt="">
                   </div>
@@ -56,12 +58,37 @@ function showCards() {
    }
 }
 
-function verifyCards(place) {
-   turnCards(place);
+function turnCards(place) {
+   let click = place;
+   flipCards(click);
+   if(!first_Card) {
+      return first_Card = click;
+      
+   } else if (place.id !== first_Card.id) {
+      second_Card = click;
+      
+   }
+   first_Img = first_Card.querySelector(".parrot-gif>img").src;
+   second_Img = second_Card.querySelector(".parrot-gif>img").src;
+   verifyCards(first_Img, second_Img);
    
 }
 
-function turnCards(place) {
+function verifyCards(imgOne, imgTwo) {
+   if (imgOne === imgTwo) {
+      first_Card.removeAttribute("onclick");
+      second_Card.removeAttribute("onclick");
+      first_Card = second_Card = "";
+   }
+
+   setTimeout(()=> {
+      first_Card.classList.remove("flip");
+      second_Card.classList.remove("flip");
+      first_Card = second_Card = "";
+   }, 1000);
+}
+
+function flipCards(place) {
    place.classList.add("flip");
 }
 
